@@ -1,12 +1,12 @@
-console.log("Hello World!");
+console.log("Rock Paper Scissors Tango!!!");
 
-function getHumanChoice() {
+/*function getHumanChoice() {
     humanChoice = prompt("Select your option(rock/paper/scissors):")
     return humanChoice;
-}
+}*/
 
 
-function getComputerChoice() {
+const getComputerChoice = () => {
     //A random whole number between 1 and 9 (inclusive)
     number = Math.floor((Math.random() * 9) +1);
     if (number<=3){
@@ -19,46 +19,68 @@ function getComputerChoice() {
     return computerChoice
 }
 
-computerWins = 0;
-humanWins = 0;
-tie = 0;
+let computerWins = 0;
+let humanWins = 0;
+let tie = 0;
+let counter = 0;
 function playRound(computerChoice, humanChoice){
-    humanChoice = getHumanChoice();
-    computerChoice = getComputerChoice();
     
     if (humanChoice=="rock" && computerChoice=="paper"){
-        computerWins += 1;
-        return 'Computer Picked:'+computerChoice;
+        computerWins ++;
+        return console.log('Computer Picked:'+computerChoice);
     }else if (humanChoice=="paper" && computerChoice=="scissors"){
-        computerWins += 1;
-        return 'Computer Picked:'+computerChoice;
+        computerWins ++;
+        return console.log('Computer Picked:'+computerChoice);
     }
     else if (humanChoice=="scissors" && computerChoice=="rock"){
-        computerWins += 1;
-        return 'Computer Picked:'+computerChoice;
+        computerWins ++;
+        return console.log('Computer Picked:'+computerChoice);
     }else if(humanChoice==computerChoice){
-        tie += 1;
-        return 'Computer Picked:'+computerChoice+'\n A tie!!!';
+        tie ++;
+        return console.log('Computer Picked:'+computerChoice);
     }else{
-        humanWins += 1;
-        return 'Computer Picked:'+computerChoice;
+        humanWins ++;
+        return console.log('Computer Picked:'+computerChoice);
     }
-
 }
 
-function playGame(){
-    for(counter=0;counter<=4;counter++){
-        playRound();
-        alert("Computer chose: "+computerChoice);
-    }
 
+
+const rock = document.querySelector(".rock");
+const paper = document.querySelector(".paper");
+const scissors = document.querySelector(".scissors");
+
+rock.style.backgroundColor = "blue";
+paper.style.backgroundColor = "blue";
+scissors.style.backgroundColor = "blue";
+
+rock.addEventListener('click', () => {
+    playRound(getComputerChoice(), "rock")
+})
+
+paper.addEventListener('click', () => {
+    playRound(getComputerChoice(), "paper")
+})
+
+scissors.addEventListener('click', () => {
+    playRound(getComputerChoice(), "scissors")
+})
+
+const btn = document.createElement("button");
+btn.style.backgroundColor = "royalblue";
+btn.addEventListener('click', () => {
     if(computerWins > humanWins){
-        return "COMPUTER WINS";
-    }else if(computerWins==humanWins){
-        return "A TIE!!";
+        return console.log("Computer wins. \n Let's play one more game to settle this ;)");
+    }else if (humanWins > computerWins){
+        return console.log("YOU WIN \n Hurray!!!");
     }else{
-        return "YOU WIN \n Hooray!!";
+        return console.log("A TIE!! \n Let's play one more game to settle this ;)");
     }
-}
+})
+btn.textContent = "Results";
+btn.style.marginTop = "5px";
 
-console.log(playGame());
+const division = document.createElement("div");
+division.style.height = "150px";
+division.appendChild(btn);
+document.body.appendChild(division);
